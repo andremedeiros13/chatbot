@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+<body>   
+    <main></main> 
+</body>
+
+<script>
+     async function getContet(){
+         try {
+             const response = await fetch('http://localhost:3001/')    
+             const data = await response.json()             
+             show(data);
+         } catch (error) {
+             console.error(error)
+         }
+     } 
+
+     getContet();
+
+     function show(repositorios) {
+         let output = '';
+         for(let repositorio of repositorios) {
+             output += `<table>
+             <tr>
+             <td>${repositorio.full_name}</td>
+             <td>${repositorio.description}</td>
+              <td>${repositorio.created_at}</td>
+             <td>${repositorio.language}</td>
+            </tr>
+            </table>`
+         }
+
+         document.querySelector('main').innerHTML = output
+     }
+</script>
+</html>
